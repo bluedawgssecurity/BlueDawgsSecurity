@@ -2710,7 +2710,7 @@ a[href^="mailto:"]:hover {
   min-height: 80vh; /* or auto/fixed */
 }
 }
-.container {
+.main-content {
   width: 100%;         /* FIX */
   max-width: 100vw;    /* Optional: hard cap */
   overflow-x: hidden;  /* Reinforce at container level */
