@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLUE DAWGS SECURITY - Always Protected</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+     <style>
+    /* Search container styles */
+    .search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        margin-right: 20px;
+    }
+
+    #searchInput {
+        width: 200px;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    #searchInput:focus {
+        outline: none;
+        width: 250px;
+        border-color: #0C2340;
+        box-shadow: 0 0 0 2px rgba(12, 35, 64, 0.1);
+    }
+
+    #searchButton {
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: -35px;
+        color: #666;
+        transition: color 0.3s ease;
+    }
+
+    #searchButton:hover {
+        color: #0C2340;
+    }
+
+    .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 300px;
+        overflow-y: auto;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: none;
+    }
+
+    .search-result-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background-color 0.2s ease;
+    }
+
+    .search-result-item:hover {
+        background-color: #f9f9f9;
+    }
+
+    .search-result-item.active {
+        background-color: #f0f0f0;
+    }
+
+    .highlight {
+        background-color: rgba(255, 199, 44, 0.3);
+        padding: 0 2px;
+    }
+
+    /* Responsive search styles */
+    @media (max-width: 768px) {
+        .search-container {
+            position: absolute;
+            right: 60px;
+            top: 15px;
+        }
+        
+        #searchInput {
+            width: 0;
+            padding: 8px 0;
+            border: none;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .search-container.active #searchInput {
+            width: 150px;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        #searchButton {
+            margin-left: 0;
+            background-color: transparent;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .search-results {
+            width: 200px;
+            right: 0;
+            left: auto;
+        }
+    }
+    /* Status Badge */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 199, 44, 0.1);
+    padding: 8px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    z-index: 2;
+    position: absolute;
+    left: 80px;
+    top: 90px;
+}
+
+.status-badge span {
+    color: #ffc72c;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+}
+
+/* Pulsating Dot */
+.pulse-dot {
+    position: relative;
+    width: 10px;
+    height: 10px;
+}
+
+.pulse-dot:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffc72c;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.pulse-dot:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffc72c;
+    border-radius: 50%;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(12, 35, 64, 0.5); /* dark blue transparent */
+  z-index: 1; /* must sit below content, above background */
+  pointer-events: none; /* lets clicks pass through */
+}
+
+</style>
+</head>
+<body>
+     <div class="top-contact-bar">
+  <div class="top-left">
+    <span><i class="fas fa-phone-alt"></i> <a href="tel:+27816647864">0816 647 864</a></span>
+    <span><i class="fas fa-envelope"></i> <a href="mailto:info@bluedawgssecurity.co.za">info@bluedawgssecurity.co.za</a></span>
+  </div>
+  <div class="top-right">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://x.com/bluedawgssecure?s=11"><i class="fab fa-twitter"></i></a>
+    <a href="https://www.instagram.com/bluedawgssecure?igsh=MW4wOXZnemp2amdpZA=="><i class="fab fa-instagram"></i></a>
+  </div>
+</div>
+    <div class="container">
+
+
+
+        <!-- Left Vertical Navigation -->
+        <nav class="vertical-nav">
+
+            <!--<div class="logo">-->
+                <img src="BDS-logo-cropped.png" alt="Logo" id="BDS-logo"></img>
+            <!--</div>-->
+            <div class="nav-links">
+                <div class="nav-item active" data-section="home">
+                    <a href="#home" class="rotated-text">HOME</a>
+                    <div class="nav-line"></div>
+                </div>
+                <div class="nav-item" data-section="about">
+                    <a href="#about" class="rotated-text">ABOUT</a>
+                    <div class="nav-line"></div>
+                </div>
+                <div class="nav-item has-dropdown" data-section="services">
+                    <a href="#services" class="rotated-text">SERVICES</a>
+                    <div class="nav-line"></div>
+                    <div class="dropdown-menu horizontal perpendicular">
+                        <a href="armed-reaction.html" class="dropdown-item">Armed Reaction</a>
+                        <a href="guarding.html" class="dropdown-item">Guarding</a>
+                        <a href="technology.html" class="dropdown-item">Technology</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item" data-section="clients">
+                    <a href="#clients" class="rotated-text">CLIENTS</a>
+                    <div class="nav-line"></div>
+                </div>
+                <div class="nav-item" data-section="bbbee">
+    <a href="#bbbee" class="rotated-text">BBBEE</a>
+    <div class="nav-line"></div>
+</div>
+                <div class="nav-item" data-section="contact">
+                    <a href="#contact" class="rotated-text">CONTACT</a>
+                    <div class="nav-line"></div>
+                </div>
+
+            </div>
+           
+            <div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search topics..." autocomplete="off">
+  <button id="searchButton">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+  </button>
+  <div id="searchResults" class="search-results"></div>
+</div>
+ <div class="hamburger-menu">
+                <div class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+             <div class="nav-bezel">
+                <div class="arrow-pattern"></div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay">
+            <div class="mobile-nav-content">
+                <div class="mobile-nav-header">
+                    <div class="mobile-logo">
+                        <img src="logo2.png" alt="Logo">
+                        <span>BLUE DAWGS SECURITY</span>
+                    </div>
+                    <div class="mobile-close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+
+                <div class="mobile-nav-links">
+                    <a href="#home" class="mobile-nav-item" data-section="home">HOME</a>
+                    <a href="#about" class="mobile-nav-item" data-section="about">ABOUT</a>
+                    <div class="mobile-nav-dropdown">
+  <div class="mobile-nav-item mobile-dropdown-toggle" data-section="services">
+    SERVICES <span class="dropdown-icon">▼</span>
+  </div>
+  <div class="mobile-dropdown-content">
+    <a href="armed-reaction.html" class="mobile-dropdown-item">Armed Reaction</a>
+    <a href="guarding.html" class="mobile-dropdown-item">Guarding</a>
+    <a href="technology.html" class="mobile-dropdown-item">Technology</a>
+  </div>
+</div>
+<a href="bbbee.html" class="mobile-nav-item" data-section="bbbee">BBBEE</a>
+                    <a href="#clients" class="mobile-nav-item" data-section="clients">CLIENTS</a>
+                    <a href="#contact" class="mobile-nav-item" data-section="contact">CONTACT</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+           <!-- Hero Section -->
+            <div class="hero-overlay"></div>
+            <div class="hero-wrapper">
+<section class="hero" id="home">
+    <div class="floating-element float-1"></div>
+    <div class="floating-element float-2"></div>
+    <div class="floating-element float-3"></div>
+    <div class="status-badge">
+    <span class="pulse-dot"></span>
+    <span>24/7 SECURITY MONITORING</span>
+</div>
+    <div class="hero-content">
+        <h1>ALWAYS<br>PROTECTED</h1>
+        <p>Get Protected Today</p>
+        <a href="#contact" class="btn">Contact Us <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+    </div>
+</section>
+</div>
+                
+                <!-- Animated Down Arrow -->
+                <div class="scroll-arrow">
+                    <a href="#about">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+                
+                <!-- Page Indicator -->
+                <div class="page-indicator">
+                    <span class="current-page">01</span>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="about-section section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2>ABOUT US</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="about-grid">
+                        <div class="about-text">
+                            <h3>BLUE DAWGS SECURITY</h3>
+                            <p>We are a premier security company dedicated to providing comprehensive protection services for individuals and businesses. With years of experience in the security industry, we have established ourselves as a trusted name in protection services.</p>
+                            <p>Our mission is to ensure the safety and security of our clients through innovative solutions and exceptional service. We believe in proactive security measures that prevent incidents before they occur.</p>
+                            <div class="stats-container">
+                                <div class="stat-item">
+                                    <span class="stat-number" data-count="98">0</span><span>%</span>
+                                    <span class="stat-text">Customer Satisfaction</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-count="350">0</span><span>+</span>
+                                    <span class="stat-text">Hours of surveillance per week</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-count="24">0</span><span>/7</span>
+                                    <span class="stat-text">Support</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Security team">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="services-section section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2>OUR SERVICES</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="services-grid">
+                        <div id="armed-reaction" class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Armed Reaction</h3>
+                            <p>Reliable and effective response to crime prevention. Our trained professionals are ready to respond quickly to any security threat, ensuring your safety at all times.</p>
+                            <a href="armed-reaction.html" class="service-link">Learn More</a>
+                        </div>
+                        <div id="guarding" class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h3>Guarding</h3>
+                            <p>We provide expert guarding across various industries. Our guards are highly trained and equipped to handle any situation, providing peace of mind for your business or residence.</p>
+                            <a href="guarding.html" class="service-link">Learn More</a>
+                        </div>
+                        <div id="technology" class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Technology</h3>
+                            <p>Technical services that allow cyber crime resistance. Protect your digital assets with our cutting-edge security solutions and stay ahead of potential threats.</p>
+                            <a href="technology.html" class="service-link">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clients Section -->
+            <section id="clients" class="clients-section section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2>OUR CLIENTS</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="testimonials">
+                        <div class="testimonial">
+                            <div class="testimonial-content">
+                                <p>"BLUE DAWGS SECURITY has transformed how we approach security at our corporate headquarters. Their professional team and innovative solutions have given us complete peace of mind."</p>
+                                <div class="testimonial-author">
+                                    <h4>John Smith</h4>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-content">
+                                <p>"The response time of their armed reaction team is impressive. When we had a security incident, they were on site within minutes. I couldn't recommend them more highly."</p>
+                                <div class="testimonial-author">
+                                    <h4>Sarah Johnson</h4>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-content">
+                                <p>"Their advanced surveillance and alarm systems have safeguarded our facilities from multiple intrusion attempts. The team is skilled, responsive, and consistent"</p>
+                                <div class="testimonial-author">
+                                    <h4>Michael Chen</h4>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Client Logos Carousel -->
+                    <!--<div class="client-logos-carousel">
+                        <div class="carousel-track">
+                             First set of logos 
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                               <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            Duplicate set for infinite scrolling
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                               <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="BDS-logo.png">
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </section>
+            <!-- BBBEE Certificate Section -->
+<section id="bbbee" class="bbbee-section section">
+    <div class="section-content">
+        <div class="section-header">
+            <h2>BBBEE CERTIFICATE</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="bbbee-grid">
+            <div class="bbbee-text">
+                <h3>Level One BBBEE Certificate</h3>
+                <p>BLUE DAWGS SECURITY is proud to be a Level One BBBEE (Broad-Based Black Economic Empowerment) certified company. This certification demonstrates our commitment to economic transformation and inclusive growth in South Africa.</p>
+                <p>Our Level One status represents the highest level of compliance with the BBBEE Codes of Good Practice, reflecting our dedication to:</p>
+                <ul class="bbbee-list">
+                    <li>Ownership and management diversity</li>
+                    <li>Skills development and training</li>
+                    <li>Enterprise and supplier development</li>
+                    <li>Socio-economic development</li>
+                </ul>
+                <div class="bbbee-badge">
+                    <div class="badge-content">
+                        <span class="badge-level">LEVEL</span>
+                        <span class="badge-number">1</span>
+                        <span class="badge-text">BBBEE CONTRIBUTOR</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bbbee-image-container">
+                <div class="bbbee-image">
+                    <img src="https://images.unsplash.com/photo-1653566031535-bcf33e1c2893?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="BBBEE Certificate">
+                </div>
+                <div class="certificate-cta">
+                    <a href="bbbee.html" class="certificate-button">
+                        <i class="fas fa-certificate"></i>
+                        View Certificate Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Our Partners Section -->
+<section id="partners" class="partners-section section">
+    <div class="section-content">
+        <div class="section-header">
+            <h2>OUR PARTNERS</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="partners-description">
+            <p>BLUE DAWGS SECURITY is proud to collaborate with industry-leading organizations to provide comprehensive security solutions.</p>
+        </div>
+        <div class="partners-grid">
+            <!-- Partner logos - replace with your actual partner logos -->
+            <div class="partner-item">
+                <img src="https://www.psira.co.za/images/nicepage-images/psira_trans.png" alt="Partner 1">
+            </div>
+            <div class="partner-item">
+                <img src="Saps Logo Vector.svg" alt="Partner 2">
+        </div>
+    </div>
+</section>
+            <!-- Contact Section -->
+            <section id="contact" class="contact-section section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2>CONTACT US</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h3>Get In Touch</h3>
+                            <p>Ready to take your security to the next level? Contact us today to discuss how we can help protect what matters most to you.</p>
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>79 The Image Two, Glen Marias, Kempton Park</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <a href="tel:+27816647864"><p>+27 81 664 7864</p></a>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <a href="mailto:info@bluedawgssecurity.co.za"><p>info@bluedawgssecurity.co.za</p></a>
+                                </div>
+                            </div>
+                            <div class="social-links">
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://x.com/bluedawgssecure?s=11" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="https://www.instagram.com/bluedawgssecure?igsh=MW4wOXZnemp2amdpZA==" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            </div>
+                            
+                            <!-- Map Container -->
+                            <div class="map-container">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.011267738592!2d28.242477475422415!3d-26.06588815835517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956b88c6b196ab%3A0x88515ea28d1bb2f1!2sThe%20Image%20Two!5e0!3m2!1sen!2sza!4v1746748723078!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                        <form autocomplete="on" id="contact-form">
+  <div class="form-group">
+    <input type="text" name="name" placeholder="Your Name" required>
+  </div>
+  <div class="form-group">
+    <input type="email" name="email" placeholder="Your Email" required>
+  </div>
+  <div class="form-group">
+    <input type="tel" name="phone" placeholder="Your Phone">
+  </div>
+  <div class="form-group">
+    <select name="service">
+      <option value="" disabled selected>Select Service</option>
+      <option value="armed-reaction">Armed Reaction</option>
+      <option value="guarding">Guarding</option>
+      <option value="technology">Technology</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+  </div>
+  <button type="submit" class="submit-btn">Send Message</button>
+  <div id="formStatus" class="form-status"></div>
+</form>
+  </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <img src="logo2.png" alt="Blue Dawgs Security Logo">
+                        <h3>BLUE DAWGS SECURITY</h3>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#bbbee">BBBEE</a>
+                        <a href="#clients">Clients</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <div class="footer-copyright">
+                        <p>&copy; 2025 BLUE DAWGS SECURITY. All Rights Reserved.</p>
+                        <div class="created-by">
+                            <p>Created by</p>
+                            <a  href="https://leez-wrld.github.io/new-porfolio/"><img src="bakoena devhaus.png" alt="Bakoena Devhaus Logo"></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+<!-- Back to Top Button -->
+<button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+           /* // Apply image mask to main heading
+            const heading = document.querySelector('.main-heading');
+            heading.style.backgroundImage = "url('yellow2.png')";
+            heading.style.backgroundClip = "text";
+            heading.style.webkitBackgroundClip = "text";
+            heading.style.color = "transparent";
+            heading.style.backgroundPosition = "center";
+            
+            // Apply image mask to subheading
+            const subheading = document.querySelector('.subheading');
+            subheading.style.backgroundImage = "url('yellow2.png')";
+            subheading.style.backgroundClip = "text";
+            subheading.style.webkitBackgroundClip = "text";
+            subheading.style.color = "transparent";
+            subheading.style.backgroundPosition = "center";
+*/
+
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.mobile-nav-overlay').classList.remove('active');
+                });
+            });
+            
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger-menu');
+            const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+            const mobileClose = document.querySelector('.mobile-close');
+            
+            hamburger.addEventListener('click', () => {
+                mobileNavOverlay.classList.add('active');
+            });
+            
+            mobileClose.addEventListener('click', () => {
+                mobileNavOverlay.classList.remove('active');
+            });
+            
+            // Mobile dropdown toggle
+            const mobileDropdown = document.querySelector('.mobile-nav-dropdown');
+            
+           document.querySelectorAll('.mobile-dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggle.parentElement.classList.toggle('active');
+  });
+});
+
+            
+            const servicesNavItem = document.querySelector('.nav-item.has-dropdown');
+
+// Toggle dropdown on click
+servicesNavItem.addEventListener('click', function (e) {
+    e.stopPropagation(); // Prevent bubbling to document
+    this.classList.toggle('dropdown-active');
+});
+
+// Prevent dropdown links from closing the menu when clicked
+const dropdownItems = document.querySelectorAll('.dropdown-item');
+dropdownItems.forEach(item => {
+    item.addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
+});
+
+// Click outside to close
+document.addEventListener('click', function (e) {
+    if (!servicesNavItem.contains(e.target)) {
+        servicesNavItem.classList.remove('dropdown-active');
+    }
+});
+            // Counter animation
+            function animateCounter(element, target, duration) {
+                let start = 0;
+                const increment = target / (duration / 16); // 16ms is roughly 60fps
+                
+                function updateCount() {
+                    start += increment;
+                    if (start > target) {
+                        element.textContent = Math.floor(target);
+                        return;
+                    }
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCount);
+                }
+                
+                updateCount();
+            }
+            
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Start counter animation when stats are visible
+                        if (entry.target.classList.contains('stats-container')) {
+                            const counters = entry.target.querySelectorAll('.stat-number');
+                            counters.forEach(counter => {
+                                const target = parseInt(counter.getAttribute('data-count'));
+                                animateCounter(counter, target, 2000); // 2 seconds duration
+                            });
+                        }
+                        
+                        // Add animation class to the section
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            // Observe all sections and the stats container
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+            
+            observer.observe(document.querySelector('.stats-container'));
+            
+            // Active navigation based on scroll position
+            function setActiveNavItem() {
+                const sections = document.querySelectorAll('.section');
+                const navItems = document.querySelectorAll('.nav-item');
+                const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+                
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('data-section') === currentSection) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                mobileNavItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('data-section') === currentSection) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', setActiveNavItem);
+            
+            // Initialize active nav item
+            setActiveNavItem();
+            
+            // Check if device is mobile for horizontal scrolling services
+            function checkMobileServices() {
+                const servicesGrid = document.querySelector('.services-grid');
+                if (window.innerWidth <= 768) {
+                    servicesGrid.classList.add('mobile-scroll');
+                } else {
+                    servicesGrid.classList.remove('mobile-scroll');
+                }
+            }
+            
+            // Run on load and resize
+            checkMobileServices();
+            window.addEventListener('resize', checkMobileServices);
+        });
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the elements
+  const mainHeading = document.querySelector('.main-heading');
+  const subheading = document.querySelector('.subheading');
+  
+  // Remove the CSS animations (if you added them)
+  mainHeading.style.animation = 'none';
+  subheading.style.animation = 'none';
+  
+  // Set initial state
+  mainHeading.style.transform = 'translateX(-100%)';
+  mainHeading.style.opacity = '0';
+  subheading.style.transform = 'translateX(-100%)';
+  subheading.style.opacity = '0';
+  
+  // Trigger animations after a short delay
+  setTimeout(() => {
+    mainHeading.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+    mainHeading.style.transform = 'translateX(0)';
+    mainHeading.style.opacity = '1';
+    
+    setTimeout(() => {
+      subheading.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+      subheading.style.transform = 'translateX(0)';
+      subheading.style.opacity = '1';
+    }, 300); // Delay for subheading
+  }, 100); // Small initial delay
+});
+document.addEventListener("DOMContentLoaded", () => {
+  emailjs.init("YnsjjNwGjUqHe7qeE"); // <-- add your EmailJS Public Key
+
+  const contactForm = document.getElementById("contact-form");
+  const formStatus = document.getElementById("formStatus");
+
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const submitBtn = contactForm.querySelector(".submit-btn");
+    submitBtn.innerHTML = "Sending...";
+    submitBtn.disabled = true;
+
+    emailjs.sendForm("service_qd59xec", "template_sirug4o", contactForm)
+      .then(() => {
+        formStatus.textContent = "Thank you! We'll be in touch soon.";
+        formStatus.className = "form-status success";
+        contactForm.reset();
+      })
+      .catch((error) => {
+        console.error("EmailJS error:", error);
+        formStatus.textContent = "Oops! Something went wrong. Please try again.";
+        formStatus.className = "form-status error";
+      })
+      .finally(() => {
+        submitBtn.innerHTML = "Send Message";
+        submitBtn.disabled = false;
+
+        setTimeout(() => {
+          formStatus.textContent = "";
+          formStatus.className = "form-status";
+        }, 5000);
+      });
+  });
+});
+
+
+
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const searchResults = document.getElementById('searchResults');
+    const searchContainer = document.querySelector('.search-container');
+
+    let searchableNodes = [];
+
+    function initializeSearchableContent() {
+      const main = document.querySelector('main');
+      searchableNodes = [];
+
+      main.querySelectorAll('section, div, p, h1, h2, h3, h4, li').forEach(el => {
+        const text = el.textContent.trim();
+        if (text.length > 0) {
+          searchableNodes.push({ element: el, text });
+        }
+      });
+    }
+
+    function performSearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      if (query.length < 2) {
+        searchResults.style.display = 'none';
+        return;
+      }
+
+      const results = searchableNodes.filter(node =>
+        node.text.toLowerCase().includes(query)
+      );
+
+      displayResults(results, query);
+    }
+
+    function displayResults(results, query) {
+      searchResults.innerHTML = '';
+      if (results.length === 0) {
+        searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+        searchResults.style.display = 'block';
+        return;
+      }
+
+      results.slice(0, 10).forEach(result => {
+        const el = result.element;
+        const previewText = result.text.length > 150 ? result.text.slice(0, 147) + '...' : result.text;
+        const anchorId = el.id || 'search-match-' + Math.floor(Math.random() * 99999);
+        if (!el.id) el.id = anchorId;
+
+        const item = document.createElement('div');
+        item.className = 'search-result-item';
+        item.innerHTML = `
+          <div><strong>${highlightMatch(previewText, query)}</strong></div>
+        `;
+        item.addEventListener('click', () => {
+          window.location.hash = `#${anchorId}`;
+          searchResults.style.display = 'none';
+          searchInput.value = '';
+          searchContainer.classList.remove('active');
+        });
+
+        searchResults.appendChild(item);
+      });
+
+      searchResults.style.display = 'block';
+    }
+
+    function highlightMatch(text, query) {
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    // INIT
+    initializeSearchableContent();
+
+    searchButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.innerWidth <= 768) {
+        if (!searchContainer.classList.contains('active')) {
+          searchContainer.classList.add('active');
+          setTimeout(() => searchInput.focus(), 300);
+        } else {
+          performSearch();
+        }
+      } else {
+        performSearch();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!searchContainer.contains(event.target)) {
+        searchResults.style.display = 'none';
+        searchContainer.classList.remove('active');
+      }
+    });
+
+    searchInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        performSearch();
+      }
+    });
+  });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+
+  let searchData = [];
+
+  // Load search data once
+  fetch("search-data.json")
+    .then(response => response.json())
+    .then(data => { searchData = data; });
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    if (query.length < 2) {
+      searchResults.style.display = "none";
+      return;
+    }
+
+    const filtered = searchData.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      item.content.toLowerCase().includes(query)
+    );
+
+    showResults(filtered, query);
+  });
+
+  function showResults(results, query) {
+    searchResults.innerHTML = "";
+    if (results.length === 0) {
+      searchResults.innerHTML = "<div class='search-result-item'>No results found</div>";
+      searchResults.style.display = "block";
+      return;
+    }
+
+    results.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "search-result-item";
+      div.innerHTML = `<strong>${highlight(item.title, query)}</strong><br><span>${highlight(item.content, query)}</span>`;
+      div.addEventListener("click", () => window.location.href = item.url);
+      searchResults.appendChild(div);
+    });
+
+    searchResults.style.display = "block";
+  }
+
+  function highlight(text, query) {
+    return text.replace(new RegExp(query, "gi"), match => `<span class="highlight">${match}</span>`);
+  }
+});
+
+// Back to Top Button Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    // Show/hide the button based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) { // Show button after scrolling 300px
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    });
+    
+    // Scroll to top when button is clicked
+    backToTopButton.addEventListener('click', function() {
+        // Smooth scroll to top
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guarding - BLUE DAWGS SECURITY</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="service-pages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+    /* Search container styles */
+    .search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        margin-right: 20px;
+    }
+
+    #searchInput {
+        width: 200px;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    #searchInput:focus {
+        outline: none;
+        width: 250px;
+        border-color: #0C2340;
+        box-shadow: 0 0 0 2px rgba(12, 35, 64, 0.1);
+    }
+
+    #searchButton {
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: -35px;
+        color: #666;
+        transition: color 0.3s ease;
+    }
+
+    #searchButton:hover {
+        color: #0C2340;
+    }
+
+    .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 300px;
+        overflow-y: auto;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: none;
+    }
+
+    .search-result-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background-color 0.2s ease;
+    }
+
+    .search-result-item:hover {
+        background-color: #f9f9f9;
+    }
+
+    .search-result-item.active {
+        background-color: #f0f0f0;
+    }
+
+    .highlight {
+        background-color: rgba(255, 199, 44, 0.3);
+        padding: 0 2px;
+    }
+
+    /* Responsive search styles */
+    @media (max-width: 768px) {
+        .search-container {
+            position: absolute;
+            right: 60px;
+            top: 15px;
+        }
+        
+        #searchInput {
+            width: 0;
+            padding: 8px 0;
+            border: none;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .search-container.active #searchInput {
+            width: 150px;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        #searchButton {
+            margin-left: 0;
+            background-color: transparent;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .search-results {
+            width: 200px;
+            right: 0;
+            left: auto;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="top-contact-bar">
+  <div class="top-left">
+    <span><i class="fas fa-phone-alt"></i> <a href="tel:+27816647864">0816 647 864</a></span>
+    <span><i class="fas fa-envelope"></i> <a href="mailto:info@bluedawgssecurity.co.za">info@bluedawgssecurity.co.za</a></span>
+  </div>
+  <div class="top-right">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://x.com/bluedawgssecure?s=11"><i class="fab fa-twitter"></i></a>
+    <a href="https://www.instagram.com/bluedawgssecure?igsh=MW4wOXZnemp2amdpZA=="><i class="fab fa-instagram"></i></a>
+  </div>
+</div>
+    <div class="container">
+        <!-- Left Vertical Navigation -->
+        <nav class="vertical-nav">
+            <img src="BDS-logo-cropped.png" alt="Logo" id="BDS-logo">
+            <div class="nav-links">
+                <div class="nav-item" data-section="home">
+                    <a href="index.html" class="rotated-text">HOME</a>
+                    <div class="nav-line"></div>
+                </div>
+                <div class="nav-item" data-section="about">
+                    <a href="index.html#about" class="rotated-text">ABOUT</a>
+                    <div class="nav-line"></div>
+                </div>
+                <div class="nav-item has-dropdown active" data-section="services">
+                    <a href="index.html#services" class="rotated-text">SERVICES</a>
+                    <div class="nav-line"></div>
+                    <div class="dropdown-menu horizontal perpendicular">
+                        <a href="armed-reaction.html" class="dropdown-item">Armed Reaction</a>
+                        <a href="guarding.html" class="dropdown-item">Guarding</a>
+                        <a href="technology.html" class="dropdown-item">Technology</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item" data-section="clients">
+                    <a href="index.html#clients" class="rotated-text">CLIENTS</a>
+                    <div class="nav-line"></div>
+                </div>
+                <div class="nav-item" data-section="bbbee">
+    <a href="index.html#bbbee" class="rotated-text">BBBEE</a>
+    <div class="nav-line"></div>
+</div>
+                <div class="nav-item" data-section="contact">
+                    <a href="index.html#contact" class="rotated-text">CONTACT</a>
+                    <div class="nav-line"></div>
+                </div>
+            </div>
+           
+            <!-- Search Container -->
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search topics..." autocomplete="off">
+    <button id="searchButton">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </button>
+    <div id="searchResults" class="search-results"></div>
+</div>
+ <div class="hamburger-menu">
+                <div class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="nav-bezel">
+                <div class="arrow-pattern"></div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay">
+            <div class="mobile-nav-content">
+                <div class="mobile-nav-header">
+                    <div class="mobile-logo">
+                        <img src="logo2.png" alt="Logo">
+                        <span>BLUE DAWGS SECURITY</span>
+                    </div>
+                    <div class="mobile-close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="mobile-nav-links">
+                    <a href="index.html" class="mobile-nav-item" data-section="home">HOME</a>
+                    <a href="index.html#about" class="mobile-nav-item" data-section="about">ABOUT</a>
+                  <div class="mobile-nav-dropdown">
+  <div class="mobile-nav-item mobile-dropdown-toggle" data-section="services">
+    SERVICES <span class="dropdown-icon">▼</span>
+  </div>
+  <div class="mobile-dropdown-content">
+    <a href="armed-reaction.html" class="mobile-dropdown-item">Armed Reaction</a>
+    <a href="guarding.html" class="mobile-dropdown-item">Guarding</a>
+    <a href="technology.html" class="mobile-dropdown-item">Technology</a>
+  </div>
+</div>
+<a href="bbbee.html" class="mobile-nav-item" data-section="bbbee">BBBEE</a>
+
+                    <a href="index.html#clients" class="mobile-nav-item" data-section="clients">CLIENTS</a>
+                    <a href="index.html#contact" class="mobile-nav-item" data-section="contact">CONTACT</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="service-hero-section section">
+                <div class="service-hero-content">
+                    <h1 class="service-title">GUARDING</h1>
+                    <div class="service-line"></div>
+                    <p class="service-subtitle">Professional security personnel for your peace of mind</p>
+                </div>
+                <div class="service-hero-image" style="background-image: url('guarding.png')"></div>
+            </section>
+
+            <!-- Service Overview -->
+            <section class="service-overview-section section">
+                <div class="section-content">
+                    <div class="service-overview-grid">
+                        <div class="service-overview-text">
+                            <h2>Our Guarding Service</h2>
+                            <p>BLUE DAWGS SECURITY provides professional guarding services for residential, commercial, and industrial properties. Our highly trained security guards are committed to protecting your assets, personnel, and visitors.</p>
+                            <p>We understand that each client has unique security needs, which is why we offer customized guarding solutions tailored to your specific requirements and risk profile.</p>
+                            <div class="service-highlights">
+                                <div class="highlight-item">
+                                    <div class="highlight-icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div class="highlight-text">
+                                        <h3>Professional Personnel</h3>
+                                        <p>Our guards undergo rigorous training and background checks to ensure the highest standards of professionalism.</p>
+                                    </div>
+                                </div>
+                                <div class="highlight-item">
+                                    <div class="highlight-icon">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <div class="highlight-text">
+                                        <h3>Customized Solutions</h3>
+                                        <p>We develop tailored security plans based on your specific needs and risk assessment.</p>
+                                    </div>
+                                </div>
+                                <div class="highlight-item">
+                                    <div class="highlight-icon">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <div class="highlight-text">
+                                        <h3>Constant Supervision</h3>
+                                        <p>Our management team provides regular supervision and quality control checks.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="service-overview-image">
+                            <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Security Guard">
+                        </div>-->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service Features -->
+            <section class="service-features-section section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2>GUARDING SERVICES</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3>Commercial Security</h3>
+                            <p>Protect your business premises, assets, and employees with our professional commercial security guards.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3>Residential Security</h3>
+                            <p>Ensure the safety of your home and family with our dedicated residential security personnel.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <h3>Industrial Security</h3>
+                            <p>Safeguard your industrial facilities, equipment, and operations with our specialized industrial security teams.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h3>Event Security</h3>
+                            <p>Maintain order and safety at your events with our professional event security personnel.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h3>Escort Services</h3>
+                            <p>Protect valuable goods in transit with our secure escort services for high-value shipments.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <h3>VIP Protection</h3>
+                            <p>Ensure the safety of executives and VIPs with our specialized close protection officers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Guard Training -->
+            <section class="guard-training-section section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2>OUR GUARD TRAINING</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="training-content">
+                        <div class="training-text">
+                            <p>At BLUE DAWGS SECURITY, we believe that the quality of our security service is directly related to the quality of our personnel. That's why we invest heavily in the selection, training, and development of our security guards.</p>
+                            <p>All our guards undergo a comprehensive training program that covers various aspects of security operations, emergency response, customer service, and legal compliance.</p>
+                        </div>
+                        <div class="training-grid">
+                            <div class="training-item">
+                                <div class="training-icon">
+                                    <i class="fas fa-fist-raised"></i>
+                                </div>
+                                <h3>Self-Defense</h3>
+                                <p>Training in defensive tactics and conflict de-escalation techniques.</p>
+                            </div>
+                            <div class="training-item">
+                                <div class="training-icon">
+                                    <i class="fas fa-fire-extinguisher"></i>
+                                </div>
+                                <h3>Emergency Response</h3>
+                                <p>Preparation for various emergency situations including fire, medical, and security incidents.</p>
+                            </div>
+                            <div class="training-item">
+                                <div class="training-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h3>Legal Knowledge</h3>
+                                <p>Understanding of security laws, regulations, and legal boundaries.</p>
+                            </div>
+                            <div class="training-item">
+                                <div class="training-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <h3>Communication Skills</h3>
+                                <p>Development of effective communication and customer service skills.</p>
+                            </div>
+                            <div class="training-item">
+                                <div class="training-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h3>Surveillance Techniques</h3>
+                                <p>Training in observation, reporting, and surveillance methodologies.</p>
+                            </div>
+                            <div class="training-item">
+                                <div class="training-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <h3>First Aid</h3>
+                                <p>Certification in basic first aid and CPR procedures.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Client Types -->
+            <section class="client-types-section section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2>WHO WE SERVE</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="client-types-grid">
+                        <div class="client-type">
+                            <div class="client-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <h3>Retail</h3>
+                            <p>Protecting retail stores, shopping centers, and malls from theft, vandalism, and ensuring customer safety.</p>
+                        </div>
+                        <div class="client-type">
+                            <div class="client-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h3>Corporate</h3>
+                            <p>Securing corporate offices, business parks, and executive facilities with professional security personnel.</p>
+                        </div>
+                        <div class="client-type">
+                            <div class="client-icon">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <h3>Warehousing</h3>
+                            <p>Protecting inventory, equipment, and facilities in warehouses and distribution centers.</p>
+                        </div>
+                        <div class="client-type">
+                            <div class="client-icon">
+                                <i class="fas fa-hotel"></i>
+                            </div>
+                            <h3>Hospitality</h3>
+                            <p>Providing discreet and professional security for hotels, resorts, and entertainment venues.</p>
+                        </div>
+                        <div class="client-type">
+                            <div class="client-icon">
+                                <i class="fas fa-hospital"></i>
+                            </div>
+                            <h3>Healthcare</h3>
+                            <p>Ensuring the safety of patients, staff, and visitors in hospitals and healthcare facilities.</p>
+                        </div>
+                        <div class="client-type">
+                            <div class="client-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Education</h3>
+                            <p>Protecting students, faculty, and campus facilities at schools, colleges, and universities.</p>
+                        </div>
+                        <div class="client-type">
+                            <div class="client-icon">
+                                <i class="fas fa-house-user"></i>
+                            </div>
+                            <h3>Residential</h3>
+                            <p>Securing residential complexes, gated communities, and high-value private residences.</p>
+                        </div>
+                        <div class="client-type">
+                            <div class="client-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <h3>Construction</h3>
+                            <p>Protecting construction sites, equipment, and materials from theft and vandalism.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section section">
+                <div class="section-content">
+                    <div class="cta-container">
+                        <h2>Need professional security personnel?</h2>
+                        <p>Contact us today to discuss your guarding requirements and how we can help protect your property, assets, and people.</p>
+                        <a href="index.html#contact" class="cta-button">Contact Us Now</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <img src="logo2.png" alt="Blue Dawgs Security Logo">
+                        <h3>BLUE DAWGS SECURITY</h3>
+                    </div>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About</a>
+                        <a href="index.html#services">Services</a>
+                        <a href="#bbbee">BBBEE</a>
+                        <a href="index.html#clients">Clients</a>
+                        <a href="index.html#contact">Contact</a>
+                    </div>
+                    <div class="footer-copyright">
+                        <p>&copy; 2025 BLUE DAWGS SECURITY. All Rights Reserved.</p>
+                        <div class="created-by">
+                            <p>Created by</p>
+                            <a  href="https://leez-wrld.github.io/new-porfolio/"><img src="bakoena devhaus.png" alt="Bakoena Devhaus Logo"></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+<!-- Back to Top Button -->
+<button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger-menu');
+            const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+            const mobileClose = document.querySelector('.mobile-close');
+            
+            hamburger.addEventListener('click', () => {
+                mobileNavOverlay.classList.add('active');
+            });
+            
+            mobileClose.addEventListener('click', () => {
+                mobileNavOverlay.classList.remove('active');
+            });
+            
+            // Mobile dropdown toggle
+            const mobileDropdown = document.querySelector('.mobile-nav-dropdown');
+            
+           document.querySelectorAll('.mobile-dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggle.parentElement.classList.toggle('active');
+  });
+});
+
+            
+            const servicesNavItem = document.querySelector('.nav-item.has-dropdown');
+
+            // Toggle dropdown on click
+            servicesNavItem.addEventListener('click', function (e) {
+                e.stopPropagation(); // Prevent bubbling to document
+                this.classList.toggle('dropdown-active');
+            });
+
+            // Prevent dropdown links from closing the menu when clicked
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                });
+            });
+
+            // Click outside to close
+            document.addEventListener('click', function (e) {
+                if (!servicesNavItem.contains(e.target)) {
+                    servicesNavItem.classList.remove('dropdown-active');
+                }
+            });
+            
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add animation class to the section
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            // Observe all sections
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+        // Search functionality
+// Sample topics - replace with your actual content
+const topics = [
+    { title: "About Us", content: "Learn about our company history and mission", url: "index.html#about" },
+    { title: "Services", content: "Explore our professional security services and solutions", url: "index.html#services" },
+    { title: "Armed Reaction", content: "Reliable and effective response to crime prevention", url: "armed-reaction.html" },
+    { title: "Guarding", content: "Expert security guarding across various industries", url: "guarding.html" },
+    { title: "Technology", content: "Technical services that allow cyber crime resistance", url: "technology.html" },
+    { title: "Clients", content: "See what our clients say about our security services", url: "index.html#clients" },
+    { title: "Contact", content: "Get in touch with our security team", url: "index.html#contact" },
+    { title: "Security Solutions", content: "Comprehensive security solutions for businesses and homes", url: "index.html#services" },
+    { title: "24/7 Support", content: "Round-the-clock security support and monitoring", url: "index.html#about" },
+    { title: "Protection Services", content: "Professional protection services for individuals and businesses", url: "index.html#services" }
+];
+
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+const searchResults = document.getElementById('searchResults');
+const searchContainer = document.querySelector('.search-container');
+
+// Function to perform search
+function performSearch() {
+    const query = searchInput.value.trim().toLowerCase();
+    
+    if (query.length < 2) {
+        searchResults.style.display = 'none';
+        return;
+    }
+    
+    // Filter topics based on search query
+    const results = topics.filter(topic => {
+        return topic.title.toLowerCase().includes(query) || 
+            topic.content.toLowerCase().includes(query);
+    });
+    
+    // Display results
+    displayResults(results, query);
+}
+
+// Function to display search results
+function displayResults(results, query) {
+    searchResults.innerHTML = '';
+    
+    if (results.length === 0) {
+        searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+        searchResults.style.display = 'block';
+        return;
+    }
+    
+    results.forEach(result => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'search-result-item';
+        
+        // Highlight matching text
+        const titleHighlighted = highlightMatch(result.title, query);
+        const contentHighlighted = highlightMatch(result.content, query);
+        
+        resultItem.innerHTML = `
+            <div><strong>${titleHighlighted}</strong></div>
+            <div class="result-content">${contentHighlighted}</div>
+        `;
+        
+        // Add click event to navigate to the topic
+        resultItem.addEventListener('click', function() {
+            window.location.href = result.url;
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+            if (window.innerWidth <= 768) {
+                searchContainer.classList.remove('active');
+            }
+        });
+        
+        searchResults.appendChild(resultItem);
+    });
+    
+    searchResults.style.display = 'block';
+}
+
+// Function to highlight matching text
+function highlightMatch(text, query) {
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<span class="highlight">$1</span>');
+}
+
+// Event listeners
+searchInput.addEventListener('input', performSearch);
+
+searchButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (window.innerWidth <= 768) {
+        searchContainer.classList.toggle('active');
+        if (searchContainer.classList.contains('active')) {
+            setTimeout(() => {
+                searchInput.focus();
+            }, 300);
+        } else {
+            searchResults.style.display = 'none';
+        }
+    } else {
+        performSearch();
+    }
+});
+
+// Close search results when clicking outside
+document.addEventListener('click', function(event) {
+    if (!searchContainer.contains(event.target)) {
+        searchResults.style.display = 'none';
+        if (window.innerWidth <= 768) {
+            searchContainer.classList.remove('active');
+        }
+    }
+});
+
+// Handle keyboard navigation in search results
+searchInput.addEventListener('keydown', function(e) {
+    if (searchResults.style.display === 'block') {
+        const items = searchResults.querySelectorAll('.search-result-item');
+        const activeItem = searchResults.querySelector('.search-result-item.active');
+        
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (!activeItem) {
+                items[0].classList.add('active');
+            } else {
+                const nextItem = activeItem.nextElementSibling;
+                if (nextItem) {
+                    activeItem.classList.remove('active');
+                    nextItem.classList.add('active');
+                }
+            }
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (activeItem) {
+                const prevItem = activeItem.previousElementSibling;
+                if (prevItem) {
+                    activeItem.classList.remove('active');
+                    prevItem.classList.add('active');
+                }
+            }
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (activeItem) {
+                activeItem.click();
+            }
+        } else if (e.key === 'Escape') {
+            searchResults.style.display = 'none';
+            if (window.innerWidth <= 768) {
+                searchContainer.classList.remove('active');
+            }
+        }
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+
+  let searchData = [];
+
+  // Load search data once
+  fetch("search-data.json")
+    .then(response => response.json())
+    .then(data => { searchData = data; });
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    if (query.length < 2) {
+      searchResults.style.display = "none";
+      return;
+    }
+
+    const filtered = searchData.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      item.content.toLowerCase().includes(query)
+    );
+
+    showResults(filtered, query);
+  });
+
+  function showResults(results, query) {
+    searchResults.innerHTML = "";
+    if (results.length === 0) {
+      searchResults.innerHTML = "<div class='search-result-item'>No results found</div>";
+      searchResults.style.display = "block";
+      return;
+    }
+
+    results.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "search-result-item";
+      div.innerHTML = `<strong>${highlight(item.title, query)}</strong><br><span>${highlight(item.content, query)}</span>`;
+      div.addEventListener("click", () => window.location.href = item.url);
+      searchResults.appendChild(div);
+    });
+
+    searchResults.style.display = "block";
+  }
+
+  function highlight(text, query) {
+    return text.replace(new RegExp(query, "gi"), match => `<span class="highlight">${match}</span>`);
+  }
+});
+
+
+    </script>
+</body>
+</html>

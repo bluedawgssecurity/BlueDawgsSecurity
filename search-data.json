@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Armed Reaction",
+    "content": "Blue Dawgs Security provides a rapid armed response service that ensures your safety and security at all times. Our highly trained armed reaction officers are strategically positioned to respond quickly to any security threat.",
+    "url": "armed-reaction.html"
+  },
+  {
+    "title": "Guarding",
+    "content": "Blue Dawgs Security provides professional guarding services for residential, commercial, and industrial properties. Our guards are highly trained to protect your assets, personnel, and visitors.",
+    "url": "guarding.html"
+  },
+  {
+    "title": "Technology",
+    "content": "Our technology services include advanced surveillance systems, alarm systems, remote monitoring, and cybersecurity tools to protect your digital and physical spaces.",
+    "url": "technology.html"
+  },
+  {
+    "title": "About Us",
+    "content": "We are a premier security company dedicated to providing comprehensive protection services for individuals and businesses. Our mission is safety through innovation and excellence.",
+    "url": "index.html#about"
+  },
+  {
+    "title": "Our Services",
+    "content": "We offer Armed Reaction, Guarding, and Technology services to ensure your safety is never compromised.",
+    "url": "index.html#services"
+  },
+  {
+    "title": "Clients",
+    "content": "Hear what our clients say about us. Testimonials reflect our reliability and commitment to security excellence.",
+    "url": "index.html#clients"
+  },
+  {
+    "title": "Contact Us",
+    "content": "Get in touch with Blue Dawgs Security to discuss how we can help protect what matters most to you.",
+    "url": "index.html#contact"
+  }
+]
