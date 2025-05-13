@@ -2709,7 +2709,33 @@ a[href^="mailto:"]:hover {
   z-index: 1;
   min-height: 80vh; /* or auto/fixed */
 }
+}
+.vertical-nav {
+  flex-wrap: nowrap; /* prevent items from stacking */
+  overflow-x: auto;  /* allow horizontal scroll if needed */
+}
 
+.nav-links,
+.search-container,
+.hamburger-menu {
+  min-width: 0;         /* allow shrinking */
+  flex-shrink: 1;       /* enable shrinkage on overflow */
+}
 
+@media (max-width: 768px) {
+  .vertical-nav {
+    padding: 0 10px;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .search-container {
+    margin: 0;
+    right: 50px;
+  }
+
+  #searchInput {
+    max-width: 140px;
+  }
 }
 
