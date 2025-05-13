@@ -2711,31 +2711,26 @@ a[href^="mailto:"]:hover {
 }
 }
 .vertical-nav {
-  flex-wrap: nowrap; /* prevent items from stacking */
-  overflow-x: auto;  /* allow horizontal scroll if needed */
+  overflow-x: hidden; /* prevents accidental horizontal scroll */
+  flex-wrap: nowrap;  /* ensures items stay inline */
+  width: 100%;
+  max-width: 100vw;   /* hard stops width at viewport */
+  box-sizing: border-box;
 }
 
 .nav-links,
 .search-container,
 .hamburger-menu {
-  min-width: 0;         /* allow shrinking */
-  flex-shrink: 1;       /* enable shrinkage on overflow */
+  min-width: 0;
+  flex-shrink: 1;  /* allow items to shrink if needed */
 }
 
-@media (max-width: 768px) {
-  .vertical-nav {
-    padding: 0 10px;
-    justify-content: flex-start;
-    gap: 10px;
-  }
-
-  .search-container {
-    margin: 0;
-    right: 50px;
-  }
-
-  #searchInput {
-    max-width: 140px;
-  }
+.search-container {
+  max-width: 160px; /* cap search width */
+  overflow: hidden;
 }
 
+#searchInput {
+  width: 100%;
+  max-width: 150px;
+}
